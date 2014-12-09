@@ -10,7 +10,10 @@ class Admin::TicketsController < Admin::BaseController
   end
 
   def update
+    reply_subject = params[:reply_subject]
+    reply_message = params[:reply_message]
     if @ticket.update_attributes(ticket_params)
+      @ticket.send_reply_email(reply_subject, reply_message)
       flash[:notice] = "Ticket has been updated."
       redirect_to [:admin, @ticket]
     else
@@ -22,9 +25,27 @@ class Admin::TicketsController < Admin::BaseController
   def history
     @events = Event.where(reference: params[:reference])
   end
+  #statuses
+  #"Waiting for Staff Response"
+  #"Waiting for Customer"
+  #"On Hold"
+  #"Cancelled"
+  #"Completed"
+  def new_unassigned
+    @tickets = Ticket.where("status = ? OR status = ?", "Waiting for Staff Response", "Cancelled")
+  end
 
-  def reply
-    @ticket.send_reply_email(reply_subject, reply_message)
+  def open
+    @tickets = Ticket.where("status != ? AND status != ?  AND status != ?  AND status != ?",
+     "Waiting for Staff Response", "Cancelled", "On Hold", "Completed")
+  end
+
+  def on_hold
+    @tickets = Ticket.where(status: "On Hold")
+  end
+
+  def closed
+    @tickets = Ticket.where(status: "Completed")
   end
 
   private

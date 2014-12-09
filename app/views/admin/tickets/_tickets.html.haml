@@ -1,0 +1,17 @@
+%table#tickets_table
+  %thead
+    %td Name
+    %td Email
+    %td Department
+    %td Subject
+    %td Owner
+  %tbody
+    = @tickets.each do |ticket|
+      %tr= ticket.name
+      %tr= ticket.email
+      %tr= ticket.department
+      %tr= ticket.subject
+      - if( ticket.status != 'Waiting for Staff Response' || !ticket.user)
+        %tr= ticket.user
+      - else
+        %tr Unassigned

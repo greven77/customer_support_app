@@ -7,7 +7,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'base#index'
-    resources :tickets
+    get 'tickets/new_unassigned', to: 'tickets#new_unassigned', :as => 'new_unassigned_tickets'
+    get 'tickets/open', to: 'tickets#open', :as => 'open_tickets'
+    get 'tickets/on_hold', to: 'tickets#on_hold', :as => 'on_hold_tickets'
+    get 'tickets/closed', to: 'tickets#closed', :as => 'closed_tickets'
     resources :statuses
   end
 end
