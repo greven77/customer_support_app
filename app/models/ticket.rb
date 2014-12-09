@@ -22,11 +22,14 @@ class Ticket < ActiveRecord::Base
     Event.create!(previous_status: self.previous_status,
       current_status: self.status, 
       issue: self.issue,
-      reference: self.reference)
+      reference: self.reference,
+      reply_subject: self.reply_subject,
+      reply_message: self.reply_message)
   end
 
   def send_confirmation_email
-    Notifier.confirmation_email(self).deliver
+    self.email_confirmed = true
+    #Notifier.confirmation_email(self).deliver
   end
 
   def send_reply_email(reply, subject)

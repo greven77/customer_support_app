@@ -2,11 +2,11 @@ class Admin::TicketsController < Admin::BaseController
   before_action :set_ticket, only: [:edit, :update, :show, :reply]
 
   def show
-
+    @event = Event.where(reference: @ticket.reference).last
   end
 
   def edit
-
+    @statuses = Status.all.map(&:description)
   end
 
   def update
@@ -25,19 +25,14 @@ class Admin::TicketsController < Admin::BaseController
   def history
     @events = Event.where(reference: params[:reference])
   end
-  #statuses
-  #"Waiting for Staff Response"
-  #"Waiting for Customer"
-  #"On Hold"
-  #"Cancelled"
-  #"Completed"
+
   def new_unassigned
     @tickets = Ticket.where("status = ? OR status = ?", "Waiting for Staff Response", "Cancelled")
   end
 
   def open
-    @tickets = Ticket.where("status != ? AND status != ?  AND status != ?  AND status != ?",
-     "Waiting for Staff Response", "Cancelled", "On Hold", "Completed")
+    @tickets = Ticket.where("status != ? AND status != ?  AND status != ?",
+     "Waiting for Staff Response", "Cancelled", "Completed")
   end
 
   def on_hold

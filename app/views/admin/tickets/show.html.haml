@@ -1,0 +1,33 @@
+%p
+  = label_tag 'name'
+  = @ticket.name
+  %br/
+
+%p
+  = label_tag 'email'
+  = @ticket.email
+  %br/
+
+%p
+  = label_tag 'department'
+  = @ticket.department
+
+%p
+  = label_tag 'subject'
+  = @ticket.subject
+
+%p
+  = label_tag 'issue'
+  %br/
+  = @ticket.issue
+
+%p
+  = label_tag 'status'
+  = @ticket.status
+
+%p
+  = label_tag 'Your reply subject'
+  = @event.reply_subject
+%p
+  = label_tag 'Your reply message'
+  = @event.reply_message

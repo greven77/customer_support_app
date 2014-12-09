@@ -12,5 +12,6 @@ Rails.application.routes.draw do
     get 'tickets/on_hold', to: 'tickets#on_hold', :as => 'on_hold_tickets'
     get 'tickets/closed', to: 'tickets#closed', :as => 'closed_tickets'
     resources :statuses
+    resources :tickets, :except => [:index, :destroy, :new]
   end
 end

@@ -5,13 +5,16 @@
     %td Department
     %td Subject
     %td Owner
+    %td Action
   %tbody
-    = @tickets.each do |ticket|
-      %tr= ticket.name
-      %tr= ticket.email
-      %tr= ticket.department
-      %tr= ticket.subject
-      - if( ticket.status != 'Waiting for Staff Response' || !ticket.user)
-        %tr= ticket.user
-      - else
-        %tr Unassigned
+    - @tickets.each do |ticket|
+      %tr
+        %td= ticket.name
+        %td= ticket.email
+        %td= ticket.department
+        %td= ticket.subject
+        - if( ticket.status != 'Waiting for Staff Response' || !ticket.user)
+          %td= ticket.user
+        - else
+          %td Unassigned
+        %td= link_to 'Reply', edit_admin_ticket_path(ticket)

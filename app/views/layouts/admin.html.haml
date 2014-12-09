@@ -2,7 +2,7 @@
 %html
   %head
     %title OnApp Support Issue Tracker
-    = stylesheet_link_tag    '/assets/admin/application', media: 'all'
+    = stylesheet_link_tag    'admin/application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
@@ -24,5 +24,11 @@
             = link_to 'On hold tickets', admin_on_hold_tickets_path
           %li
             = link_to 'Closed Tickets', admin_closed_tickets_path
+          - if current_user.role == 'admin'
+            %li
+              = link_to 'Add/Remove Statuses', admin_statuses_path
     #container.clearfix
+      - flash.each do |key, value|
+        .flash{:id => key}
+          = value
       = yield
