@@ -31,7 +31,7 @@
     %br/
   %p
     = f.label :status
-    = f.select(:status, @statuses, :selected => @ticket.status)
+    = f.select(:status, Status.all.map(&:description), :selected => @ticket.status)
   %p
     = f.label :user, 'Assignee'
     = f.collection_select(:user_id, User.order(:username),:id, :username, include_blank: true)

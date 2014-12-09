@@ -6,7 +6,6 @@ class Admin::TicketsController < Admin::BaseController
   end
 
   def edit
-    @statuses = Status.all.map(&:description)
     @users = User.all.map(&:username)
   end
 
