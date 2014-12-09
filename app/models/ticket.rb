@@ -3,9 +3,11 @@ class Ticket < ActiveRecord::Base
 
   before_create :set_reference
   before_save :set_previous_status
-  after_save :create_event
+  after_save :create_event, :send_reply_email
 
   attr_accessor :reply_subject, :reply_message
+
+  validates_presence_of :name, :email, :department, :issue
 
   def set_reference
     begin
@@ -32,8 +34,10 @@ class Ticket < ActiveRecord::Base
     #Notifier.confirmation_email(self).deliver
   end
 
-  def send_reply_email(reply, subject)
-    Notifier.reply_email(reply, subject, self)
+  def send_reply_email
+    if (self.reply_subject.present? && self.reply_message.present?)
+      Notifier.reply_email(self)
+    end
   end
 
   private

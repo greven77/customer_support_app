@@ -13,8 +13,11 @@
         %td= ticket.email
         %td= ticket.department
         %td= ticket.subject
-        - if( ticket.status != 'Waiting for Staff Response' || !ticket.user)
+        - if(ticket.user)
           %td= ticket.user
         - else
           %td Unassigned
-        %td= link_to 'Reply', edit_admin_ticket_path(ticket)
+        - unless ticket.status == 'Completed'
+          %td= link_to 'Reply', edit_admin_ticket_path(ticket)
+        -else
+          %td= link_to 'Reopen', edit_admin_ticket_path(ticket)

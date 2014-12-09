@@ -7,18 +7,16 @@ class Admin::TicketsController < Admin::BaseController
 
   def edit
     @statuses = Status.all.map(&:description)
+    @users = User.all.map(&:username)
   end
 
   def update
-    reply_subject = params[:reply_subject]
-    reply_message = params[:reply_message]
     if @ticket.update_attributes(ticket_params)
-      @ticket.send_reply_email(reply_subject, reply_message)
-      flash[:notice] = "Ticket has been updated."
-      redirect_to [:admin, @ticket]
+        flash[:notice] = "Ticket has been updated."
+        redirect_to [:admin, @ticket]
     else
       flash[:alert] = "Ticket has not been updated."
-      render "edit"
+      render :action => "edit"
     end
   end
 
@@ -27,7 +25,8 @@ class Admin::TicketsController < Admin::BaseController
   end
 
   def new_unassigned
-    @tickets = Ticket.where("status = ? OR status = ?", "Waiting for Staff Response", "Cancelled")
+    @tickets = Ticket.where("status = ? OR status = ?", 
+      "Waiting for Staff Response", "Cancelled")
   end
 
   def open
@@ -47,7 +46,7 @@ class Admin::TicketsController < Admin::BaseController
 
   def ticket_params
     params.require(:ticket).permit(:name, :email, :department,:subject,
-      :issue, :status, :reply_subject, :reply_message)
+      :issue, :status, :reply_subject, :reply_message, :user, :user_id)
   end
 
   def set_ticket

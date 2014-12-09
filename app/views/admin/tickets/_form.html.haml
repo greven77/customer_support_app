@@ -33,12 +33,15 @@
     = f.label :status
     = f.select(:status, @statuses, :selected => @ticket.status)
   %p
+    = f.label :user, 'Assignee'
+    = f.collection_select(:user_id, User.order(:username),:id, :username, include_blank: true)
+  %p
     = f.label :reply_subject, 'Reply Subject'
     = f.text_field :reply_subject
     %br/
   %p
     = f.label :reply_message, 'Reply Message'
     %br/
-    = f.text_area :reply_subject
+    = f.text_area :reply_message
     %br/
   = f.submit
