@@ -1,0 +1,7 @@
+- @events.each do |event|
+  %b Status
+  - if event.previous_status
+    = event.previous_status
+    \&arr; #{event.current_status}
+  - else
+    = event.previous_status

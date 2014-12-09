@@ -11,15 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141208193530) do
+ActiveRecord::Schema.define(version: 20141208230626) do
+
+  create_table "events", force: true do |t|
+    t.string   "reference"
+    t.string   "previous_status"
+    t.string   "current_status"
+    t.string   "issue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "statuses", force: true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tickets", force: true do |t|
+    t.string   "subject"
+    t.string   "name"
+    t.string   "email"
+    t.string   "department"
+    t.text     "issue"
+    t.string   "reference"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "email_confirmed", default: false,                        null: false
+    t.string   "previous_status"
+    t.string   "status",          default: "Waiting for Staff Response"
+  end
+
+  add_index "tickets", ["user_id"], name: "index_tickets_on_user_id"
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",      null: false
+    t.string   "encrypted_password",     default: "",      null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,       null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -27,6 +59,7 @@ ActiveRecord::Schema.define(version: 20141208193530) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
+    t.string   "role",                   default: "staff"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
