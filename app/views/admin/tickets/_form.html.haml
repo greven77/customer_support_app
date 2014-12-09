@@ -1,4 +1,4 @@
-= form_for [@ticket], :html => { :id => "ticket_form" } do |f|
+= form_for [:admin, @ticket], :class => "ticket_form" do |f|
   - if @ticket.errors.any?
     #error_explanation
       %h2
@@ -26,7 +26,16 @@
     %br/
   %p
     = f.label :issue
-    %br
     = f.text_area :issue
+    %br/
+  %p
+    = f.label :reply_subject
+    %br/
+    = f.text_field :reply_subject
+    %br/
+  %p
+    = f.label :reply_message
+    %br/
+    = f.text_area :reply_subject
     %br/
   = f.submit

@@ -7,4 +7,10 @@ class Notifier < ActionMailer::Base
     mail(:to => ticket.email, 
       :subject => "Please confirm your issue support request on OnApp.com")
   end
+
+  def reply_email(reply, subject, ticket)
+    @reply = reply
+    mail(:to => ticket.email,
+       :subject => subject)
+  end
 end

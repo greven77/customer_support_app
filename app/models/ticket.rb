@@ -5,6 +5,8 @@ class Ticket < ActiveRecord::Base
   before_save :set_previous_status
   after_save :create_event
 
+  attr_accessor :reply_subject, :reply_message
+
   def set_reference
     begin
       self.reference = create_reference
@@ -27,8 +29,11 @@ class Ticket < ActiveRecord::Base
     Notifier.confirmation_email(self).deliver
   end
 
-  private
+  def send_reply_email(reply, subject)
+    Notifier.reply_email(reply, subject, self)
+  end
 
+  private
     def get_random_chars
       (0..2).map { (65 + rand(26)).chr }.join
     end

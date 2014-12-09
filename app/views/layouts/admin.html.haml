@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %title OnApp Support Issue Tracker
+    = stylesheet_link_tag    '/assets/admin/application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body
+    %header
+      .title
+        %h1 Support Issue Tracker
+      %nav#main-nav
+        %ul
+          %li
+            - if user_signed_in?
+              = link_to('logout', destroy_user_session_path, method: :delete)
+            - else
+              = link_to('login', new_user_session_path)
+          %li
+            = link_to 'New unassigned tickets',admin_new_tickets_path
+          %li
+            = link_to 'Open Tickets', admin_open_tickets_path
+          %li
+            = link_to 'On hold tickets', admin_on_hold_tickets_path
+          %li
+            = link_to 'Closed Tickets', admin_closed_tickets_path
+    #container.clearfix
+      = yield
