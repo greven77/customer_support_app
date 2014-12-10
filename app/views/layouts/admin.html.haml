@@ -10,28 +10,8 @@
     = csrf_meta_tags
   %body
     %header
-      .title
-        %h3 Support Issue Tracker
-      = render :partial => 'admin/tickets/search_form'
-      %nav#main-nav
-        %ul
-          %li
-            - if user_signed_in?
-              = link_to("Logout", destroy_user_session_path, method: :delete)
-            - else
-              = link_to('Login', new_user_session_path)
-          %li
-            = link_to 'New unassigned tickets',admin_new_unassigned_tickets_path
-          %li
-            = link_to 'Open Tickets', admin_open_tickets_path
-          %li
-            = link_to 'On hold tickets', admin_on_hold_tickets_path
-          %li
-            = link_to 'Closed Tickets', admin_closed_tickets_path
-          - if current_user.role == 'admin'
-            %li
-              = link_to 'Manage Statuses', admin_statuses_path
-    #container.clearfix
+      = render :partial => 'layouts/navbar'
+    #container.admin
       - flash.each do |key, value|
         .flash{:id => key}
           = value

@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :tickets, :except => [:index, :destroy, :show]
+  resources :tickets, :except => [:index, :destroy, :show, :update]
   get 'tickets/:reference/confirm', to: 'tickets#confirm_client_email', :as => 'ticket_confirmation'
   get 'tickets/:reference/history', to: 'tickets#history', :as => 'ticket_history'
+  put 'tickets/:reference', to: 'tickets#update', :as => 'ticket'
+  patch 'tickets/:reference', to: 'tickets#update', :as => 'ticket_patch'
   root 'tickets#new'
 
   namespace :admin do

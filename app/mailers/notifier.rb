@@ -9,7 +9,7 @@ class Notifier < ActionMailer::Base
   end
 
   def reply_email(ticket)
-    @reply = ticket.reply_message
+    @ticket = ticket
     mail(:to => ticket.email,
        :subject => ticket.reply_subject)
   end

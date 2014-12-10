@@ -1,0 +1,30 @@
+%nav.navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle{"data-target" => "#navbarCollapse", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to 'Issue Tracker', admin_root_path
+    #navbarCollapse.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li{ current_page?(admin_new_unassigned_tickets_path) ? {:class => 'active'}:{}} 
+          = link_to 'New unassigned tickets',admin_new_unassigned_tickets_path
+        %li{ current_page?(admin_open_tickets_path) ? {:class => 'active'}:{}} 
+          = link_to 'Open Tickets', admin_open_tickets_path
+        %li{ current_page?(admin_on_hold_tickets_path) ? {:class => 'active'}:{}} 
+          = link_to 'On hold tickets', admin_on_hold_tickets_path
+        %li{ current_page?(admin_closed_tickets_path) ? {:class => 'active'}:{}} 
+          = link_to 'Closed Tickets', admin_closed_tickets_path
+        - if current_user.role == 'admin'
+          %li{ current_page?(admin_statuses_path) ? {:class => 'active'}:{}} 
+            = link_to 'Manage Statuses', admin_statuses_path
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          = render :partial => 'admin/tickets/search_form'
+        %li
+          - if user_signed_in?
+            = link_to("Logout", destroy_user_session_path, method: :delete)
+          - else
+            = link_to('Login', new_user_session_path)

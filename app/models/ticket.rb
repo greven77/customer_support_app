@@ -30,8 +30,8 @@ class Ticket < ActiveRecord::Base
   end
 
   def send_confirmation_email
-    self.email_confirmed = true
-    #Notifier.confirmation_email(self).deliver
+    #self.email_confirmed = true
+    Notifier.confirmation_email(self).deliver
   end
 
   def send_reply_email

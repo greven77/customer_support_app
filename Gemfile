@@ -29,6 +29,8 @@ gem 'spring',        group: :development
 gem 'devise'
 
 group :development, :test do
+  gem 'selenium-webdriver'
+  gem 'capybara', '~>2.2.0'
   gem 'rspec-rails', '~> 3.0.0'
   gem 'factory_girl_rails', '~> 4.4.0'
   gem 'database_cleaner', '~> 1.3.0'

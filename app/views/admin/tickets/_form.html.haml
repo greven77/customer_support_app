@@ -8,6 +8,9 @@
         - @ticket.errors.full_messages.each do |msg|
           %li= msg
   %p
+    = f.label :reference
+    = f.text_field :reference, :class => "form-control", :disabled => true
+  %p
     = f.label :name
     = f.text_field :name, :class => "form-control", :disabled => true
     %br/

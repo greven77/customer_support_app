@@ -1,2 +1,8 @@
 %p
-    =@reply
+  Subject:
+  %br/
+  = @ticket.reply_subject
+%p
+  Message:
+  %br/
+  = @ticket.reply_message

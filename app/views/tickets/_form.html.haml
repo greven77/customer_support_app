@@ -1,4 +1,5 @@
-= form_for [@ticket], :html => { :id => "ticket_form" } do |f|
+- url = @ticket.persisted? ? ticket_path : tickets_path
+= form_for @ticket, :url => url, :html => { :id => "ticket_form" } do |f|
   - if @ticket.errors.any?
     #error_explanation
       %h4

@@ -77,8 +77,22 @@ h5 {
     margin-top: 150px;
 }
 
+#history h5 {
+    margin-top: 10px;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: .5em;
+}
+
 span {
     color: #00aeef;
+}
+.reply_message {
+    margin-left: 0.5em;
+}
+
+#check_history {
+    margin-left: 8em;
 }
 
 p {
@@ -93,3 +107,20 @@ p {
     text-align: center;
 }
 
+#history .header{
+    background: #EEE;
+    color: #333;
+    text-align: center;
+}
+#history {
+    margin-top: 3em;
+    width: 70em;
+    border-color: #A7ACB5;
+    border-style: solid;
+    background-color: #BAC8E3;
+    border-radius: 6px;
+}
+
+#container.admin {
+    margin-top: 70px;
+}

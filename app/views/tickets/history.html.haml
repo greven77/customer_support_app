@@ -1,0 +1,39 @@
+.title.container#top
+  %h3 Update issue
+  = link_to 'Check history', '#history', :class => "title", :id => 'check_history'
+  = render 'form'
+  #history
+    %h3 Ticket History
+    .header
+      %h5
+        %span.label.label-info Created at:
+      = @ticket.created_at.to_s :human
+    - @events.each do |event|
+      %ul.list-group
+        %li.list-group-item
+          %h5
+            %span.label.label-info Updated at:
+          = event.created_at.to_s :human
+
+        %li.list-group-item
+          - if event.previous_status
+            %h5
+              %span.label.label-info Status
+            = event.previous_status
+            &#8594; #{event.current_status}
+          - else
+            %h5
+              %span.label.label-info Status
+            = event.current_status
+            %br/
+        %li.list-group-item
+          %h5
+            %span.label.label-info Reply Subject
+          = event.reply_subject
+        %li.list-group-item
+          %h5
+            %span.label.label-info Reply Message
+          .reply_message
+            asdasdasdasd
+            = event.reply_message
+  =link_to 'Back to top', '#top', :class => "title"
