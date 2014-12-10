@@ -19,8 +19,11 @@ class Admin::TicketsController < Admin::BaseController
     end
   end
 
+  #would be quite better with elasticsearch
   def search
-    @tickets = Ticket.where(reference: params[:keyword])
+    wildcard_search = "%#{params[:keyword]}%"
+    @tickets = Ticket.where("reference = ? OR subject = ? OR issue LIKE ?",
+      params[:keyword], params[:keyword], wildcard_search)
   end
 
   def history
