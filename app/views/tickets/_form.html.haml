@@ -1,7 +1,7 @@
 = form_for [@ticket], :html => { :id => "ticket_form" } do |f|
   - if @ticket.errors.any?
     #error_explanation
-      %h2
+      %h4
         = pluralize(@ticket.errors.count, "error")
         prohibited this ticket form from being saved:
       %ul
@@ -9,24 +9,24 @@
           %li= msg
   %p
     = f.label :name
-    = f.text_field :name
+    = f.text_field :name, :class => "form-control", :placeholder => "Your name"
     %br/
   %p
     = f.label :email
-    = f.text_field :email
+    = f.text_field :email, :class => "form-control", :placeholder => "Your email"
     %br/
   %p
     = f.label :department
-    = f.text_field :department
+    = f.text_field :department, :class => "form-control", :placeholder => "Your department"
     %br/
 
   %p
     = f.label :subject
-    = f.text_field :subject
+    = f.text_field :subject, :class => "form-control", :placeholder => "Your ticket subject" 
     %br/
   %p
     = f.label :issue
     %br
-    = f.text_area :issue
+    = f.text_area :issue, :class => "form-control", :placeholder => "Your issue message"
     %br/
-  = f.submit
+  = f.submit 'Submit ticket', :class => "btn btn-primary"

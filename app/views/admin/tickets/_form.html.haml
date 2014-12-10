@@ -1,7 +1,7 @@
 = form_for [:admin, @ticket], :html => { :id => "ticket_form" } do |f|
   - if @ticket.errors.any?
     #error_explanation
-      %h2
+      %h5
         = pluralize(@ticket.errors.count, "error")
         prohibited this ticket form from being saved:
       %ul
@@ -9,39 +9,39 @@
           %li= msg
   %p
     = f.label :name
-    = f.text_field :name
+    = f.text_field :name, :class => "form-control", :disabled => true
     %br/
   %p
     = f.label :email
-    = f.text_field :email
+    = f.text_field :email, :class => "form-control", :disabled => true
     %br/
   %p
     = f.label :department
-    = f.text_field :department
+    = f.text_field :department, :class => "form-control", :disabled => true
     %br/
 
   %p
     = f.label :subject
-    = f.text_field :subject
+    = f.text_field :subject, :class => "form-control", :disabled => true
     %br/
   %p
     = f.label :issue
     %br/
-    = f.text_area :issue
+    = f.text_area :issue, :class => "form-control", :disabled => true
     %br/
   %p
     = f.label :status
-    = f.select(:status, Status.all.map(&:description), :selected => @ticket.status)
+    = f.select :status, Status.all.map(&:description), { :selected => @ticket.status}, :class =>"form-control input-sm"
   %p
     = f.label :user, 'Assignee'
-    = f.collection_select(:user_id, User.order(:username),:id, :username, include_blank: true)
+    = f.collection_select :user_id, User.order(:username),:id, :username,{ include_blank: true }, :class =>"form-control input-sm"
   %p
     = f.label :reply_subject, 'Reply Subject'
-    = f.text_field :reply_subject
+    = f.text_field :reply_subject, :class => "form-control"
     %br/
   %p
     = f.label :reply_message, 'Reply Message'
     %br/
-    = f.text_area :reply_message
+    = f.text_area :reply_message, :class => "form-control"
     %br/
-  = f.submit
+  = f.submit'Update Ticket', :class => "btn btn-primary"

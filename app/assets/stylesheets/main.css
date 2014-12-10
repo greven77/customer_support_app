@@ -1,5 +1,16 @@
+body {
+    position: relative;
+    background-color: #eeeeee;
+    font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+}
+
+/*.container {
+    margin: 0 auto;
+    text-align: center;
+} */
+
 #ticket_form {
-    padding-left: 1em;
+    padding-left: 8em;
 }
 
 #ticket_form textarea{
@@ -9,12 +20,19 @@
 
 #ticket_form label {
     display: inline-block;
-    width: 100px;
+    width: 110px;
     padding-bottom: .2em;
 }
 
 #ticket_form input {
     width: 250px;
+}
+
+#ticket_form select {
+    width: auto;
+}
+#ticket_form p {
+    margin-top: .8em;
 }
 
 #notice {
@@ -26,9 +44,52 @@
   background: #FFA3AA;
 }
 
-#errorExplanation {
+#error_explanation {
   font-size: 85%;
   color: #BF0000;
   margin-top: 1em;
   margin-bottom: 1em;
 }
+
+h3 {
+    margin: .4em 0;
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 60px;
+    letter-spacing: -3px;
+    color: #3e3d40;
+}
+
+h4 {
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    color:#3e3d40;
+    text-align: center;
+}
+
+h5 {
+    color: #00aeef;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+    line-height: 24px;
+    margin-top: 150px;
+}
+
+span {
+    color: #00aeef;
+}
+
+p {
+    color: #464646;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom:10px;
+}
+
+.title h3, .title h2 {
+    color: #33CCFF;
+    text-align: center;
+}
+

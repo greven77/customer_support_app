@@ -8,7 +8,7 @@ class TicketsController < ApplicationController
 
     if @ticket.save
       flash[:notice] = "Ticket successfully sent, please check your email."
-      render :new
+      redirect_to root_path
     else
       flash[:alert] = "Ticket has not been created."
       render :new

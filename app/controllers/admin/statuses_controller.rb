@@ -1,6 +1,10 @@
 class Admin::StatusesController < Admin::BaseController
   before_action :admin?
-  before_action :set_status, only: [:show, :edit]
+  before_action :set_status, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @statuses = Status.all
+  end
 
   def new
     @status = Status.new

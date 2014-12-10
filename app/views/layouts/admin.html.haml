@@ -2,13 +2,17 @@
 %html
   %head
     %title OnApp Support Issue Tracker
-    = stylesheet_link_tag    'admin/application', media: 'all'
     = javascript_include_tag 'application'
+    %link{:href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css", :rel => "stylesheet"}/
+
+    %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"}
+    = stylesheet_link_tag 'admin/application', media: 'all'
     = csrf_meta_tags
   %body
     %header
       .title
-        %h1 Support Issue Tracker
+        %h3 Support Issue Tracker
+      = render :partial => 'admin/tickets/search_form'
       %nav#main-nav
         %ul
           %li
@@ -26,7 +30,7 @@
             = link_to 'Closed Tickets', admin_closed_tickets_path
           - if current_user.role == 'admin'
             %li
-              = link_to 'Add/Remove Statuses', admin_statuses_path
+              = link_to 'Manage Statuses', admin_statuses_path
     #container.clearfix
       - flash.each do |key, value|
         .flash{:id => key}

@@ -1,4 +1,4 @@
-table#tickets_table{
+table{
     margin: 25px auto;
   border-collapse: collapse;
   border: 1px solid #eee;
@@ -7,6 +7,12 @@ table#tickets_table{
      0px 10px 20px rgba(0,0,0,0.05),
      0px 20px 20px rgba(0,0,0,0.05),
      0px 30px 20px rgba(0,0,0,0.05);
+}
+table#statuses_table {
+    margin-top: .5em;
+}
+table thead{
+    background: #ddd;
 }
 tbody tr:nth-child(odd) {
     background: #eee;
@@ -21,13 +27,24 @@ th, td{
     border: 1px solid #eee;
     padding: 12px 35px;
     border-collapse: collapse;
-    width: 150px;
+}
+
+tr td {
+    white-space: nowrap;
 }
 
 h1 {
     text-align: center;
 }
 
+#new_status_button {
+    text-align: center;
+    margin-top: .8em;
+}
+
+#ticket_search {
+    text-align: right;
+}
 
 nav ul {
   list-style: none;

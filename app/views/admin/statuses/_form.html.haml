@@ -1,0 +1,17 @@
+= form_for [:admin, @status], :html => { :id => "ticket_form" } do |f|
+  - if @status.errors.any?
+    #error_explanation
+      %h5
+        = pluralize(@status.errors.count, "error")
+        prohibited this status form from being saved:
+      %ul
+        - @status.errors.full_messages.each do |msg|
+          %li= msg
+  %p
+    = f.label :description
+    = f.text_field :description, :class => "form-control", :placeholder => "New status name"
+    %br/
+  -if @status.persisted?
+    = f.submit 'Update Status', :class => "btn btn-primary"
+  -else
+    = f.submit 'Create Status', :class => "btn btn-primary"

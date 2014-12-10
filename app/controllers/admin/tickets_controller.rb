@@ -19,6 +19,10 @@ class Admin::TicketsController < Admin::BaseController
     end
   end
 
+  def search
+    @tickets = Ticket.where(reference: params[:keyword])
+  end
+
   def history
     @events = Event.where(reference: params[:reference])
   end
@@ -45,7 +49,8 @@ class Admin::TicketsController < Admin::BaseController
 
   def ticket_params
     params.require(:ticket).permit(:name, :email, :department,:subject,
-      :issue, :status, :reply_subject, :reply_message, :user, :user_id)
+      :issue, :status, :reply_subject, :reply_message, :user, :user_id,
+      :keyword)
   end
 
   def set_ticket
