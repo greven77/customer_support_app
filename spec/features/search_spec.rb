@@ -8,11 +8,22 @@ context "Searching for tickets" do
     sign_in_as!(user)
   end
 
-  it "should correctly fill an issue support request" do
-
+  after(:each) do
+    click_button "search"
+    expect(page).to have_content(ticket.email)
+    expect(page).to have_content(ticket.reference)
   end
 
-  it "should output an error when a field is not filled in" do
+  it "should display results when user enters a reference as search term" do
+    fill_in "keyword", with: ticket.reference
+  end
 
+  it "should display results when user enters a subject as search term" do
+    fill_in "keyword", with: ticket.subject
+  end
+
+  it "should display results when user enters a word contained in an issue" do
+    random_part = ticket.issue.split(" ")[rand(30)]
+    fill_in "keyword", with: random_part
   end
 end
