@@ -11,8 +11,28 @@ FactoryGirl.define do
         " architecto consectetur ex, ea nam dolor praesentium possimus" +
         " quisquam culpa fuga quam laboriosam."
     sequence(:reference) { |n| "HLG-6C-VOR-1C-JO#{n}"}
-    status "MyString"
+    status "Waiting for Staff Response"
     email_confirmed true
     user nil
+    factory :ticket_on_hold do
+      after(:create) do |ticket|
+        ticket.update_attribute(:status, "On Hold")
+      end
+    end
+    factory :ticket_waiting_for_customer do
+      after(:create) do |ticket|
+        ticket.update_attribute(:status, "Waiting for Customer")
+      end
+    end
+    factory :ticket_cancelled do
+      after(:create) do |ticket|
+        ticket.update_attribute(:status, "Cancelled")
+      end
+    end
+    factory :ticket_completed do
+      after(:create) do |ticket|
+        ticket.update_attribute(:status, "Completed")
+      end
+    end
   end
 end

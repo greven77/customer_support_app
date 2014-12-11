@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-context "Creating a ticket" do
+context "Customer creating tickets" do
   before(:each) do
     visit "/"
     fill_in "Name", with: 'Antonio Pacheco'
